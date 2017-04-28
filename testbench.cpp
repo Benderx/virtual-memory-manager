@@ -1,4 +1,4 @@
-// Project1.cpp
+// testbench.cpp
 // By Andrew Duerig and Gabe Stanton
 //
 // how to compile using mingw:
@@ -6,20 +6,21 @@
 //
 //////////////////////////////////////////////////////////////////////////////////////////////
 //
-//ASSUMPTIONS (source: https://psu.instructure.com/courses/1845432/discussion_topics/11569271):
-//	The arrival time is non-negative.
-//	The arrival time for each thread is unique.
-//	The burst time (remaining time) is positive.
+//ASSUMPTIONS
+// assert(virtualAddressSpaceSize > N);
+// assert(pow(2, virtualAddressSpaceSize) > numFrames * pow(2,N));
 
-#include "myscheduler.h"
+#include "virtualMemoryManager.cpp"
+#include "stdafx.h"
+#include <random>
 
 int main(int argc, char* argv[])
 {
 	cout << "\n--Andrew Duerig and Gabe Stanton's Testbench--\n\n";
 
-	
 
-	vMMI vmmi = vMMI(POLICY, BITS_PER_BLOCK, NUMBER_OF_PAGES, VIRT_ADDRESS_SPACE);
+
+	virtualMemoryManager vmmi = virtualMemoryManager(POLICY, BITS_PER_BLOCK, NUMBER_OF_PAGES, VIRT_ADDRESS_SPACE);
 
 	cout << "Alexandar Devic - Cauchy Distribution Memory Generator" << endl;
 	cout << "Input the number of memory requests you want to process[0, ]: ";
