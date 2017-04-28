@@ -12,14 +12,16 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 		{
 			unsigned long long page_num = address / N;
 			int page_index = -1;  //Assuming number of frames is less than 2^32//
-
+			
 			bool found = false;
 			for(int i = 0; i < frame_holder.size() && found == false; i++)
 			{
+				cout << i << '\n';
 				if(frame_holder[i] == page_num)
 				{
 					found = true;
 					page_index = i;
+					cout << "p_ind = " << page_index << '\n';
 				}
 			}
 
@@ -49,6 +51,7 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 			}
 			else
 			{
+				cout << policy << '\n';
 				switch(policy)
 				{
 					case ReplacementPolicy::FIFO:
