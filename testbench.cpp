@@ -17,15 +17,17 @@ int main(int argc, char* argv[])
 {
 	cout << "\n--Andrew Duerig and Gabe Stanton's Testbench--\n\n";
 
-	ReplacementPolicy policy = ReplacementPolicy::FIFO;
-	cout << policy << '\n';
-	unsigned int page_size = 4;
-	unsigned int n_frames = 4;
-	unsigned int v_addr = 64;
+	ReplacementPolicy POLICY = ReplacementPolicy::FIFO;
+	unsigned int page_size = 2;
+	unsigned int n_frames = 16;
+	unsigned int v_addr = 8;
 
-	virtualMemoryManager vm = virtualMemoryManager(policy, page_size, n_frames, v_addr);
+	virtualMemoryManager vm = virtualMemoryManager(POLICY, page_size, n_frames, v_addr);
 	
-	unsigned long long addr = 4;
+	unsigned long long addr;
+	
+	cout << "addr? \n";
+	cin >> addr;
 	
 	cout << vm.memoryAccess(addr) << '\n';
 	

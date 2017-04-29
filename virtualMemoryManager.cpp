@@ -12,7 +12,6 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 		{
 			unsigned long long page_num = address / N;
 			int page_index = -1;  //Assuming number of frames is less than 2^32//
-			
 			bool found = false;
 			for(int i = 0; i < frame_holder.size() && found == false; i++)
 			{
@@ -51,18 +50,21 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 			}
 			else
 			{
-				cout << policy << '\n';
 				switch(policy)
 				{
 					case ReplacementPolicy::FIFO:
 						{
+							cout << "FIFO \n";
 							if(frame_holder.size() < numFrames)
 							{
+								cout << "pn " << page_num << '\n';
 								frame_holder.push_back(page_num);
 								fifo_order.push(frame_holder.size() - 1);
+								page_index = frame_holder.size() - 1;
 							}
 							else
 							{
+								cout << "else" << '\n';
 								swap(fifo_order.front(), page_num);
 								fifo_order.push(fifo_order.front());				
 								fifo_order.pop();
@@ -75,6 +77,7 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 							{
 								frame_holder.push_back(page_num);
 								lru_order.insert(lru_order.begin(), frame_holder.size());
+								page_index = frame_holder.size() - 1;
 							}
 							else
 							{
@@ -91,6 +94,7 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 						}
 				}
 			}
+			cout << "pi " << page_index << '\n';
 			return (page_index * N) + (address % N);
 		}
 
@@ -98,6 +102,7 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 		{
 			frame_holder[frameNumber] = pageNumber;
 			numSwaps++;
+			//cout << numSwaps;
 		}
 
 	protected:
