@@ -15,7 +15,6 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 			bool found = false;
 			for(int i = 0; i < frame_holder.size() && found == false; i++)
 			{
-				cout << i << '\n';
 				if(frame_holder[i] == page_num)
 				{
 					found = true;
@@ -54,17 +53,15 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 				{
 					case ReplacementPolicy::FIFO:
 						{
-							cout << "FIFO \n";
 							if(frame_holder.size() < numFrames)
 							{
-								cout << "pn " << page_num << '\n';
 								frame_holder.push_back(page_num);
 								fifo_order.push(frame_holder.size() - 1);
 								page_index = frame_holder.size() - 1;
 							}
 							else
 							{
-								cout << "else" << '\n';
+								page_index = fifo_order.front();
 								swap(fifo_order.front(), page_num);
 								fifo_order.push(fifo_order.front());				
 								fifo_order.pop();
@@ -81,6 +78,7 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 							}
 							else
 							{
+								page_index = lru_order[lru_order.size()-1];
 								swap(lru_order[lru_order.size()-1], page_num);
 								lru_order.insert(lru_order.begin(), lru_order[lru_order.size()-1]);
 								lru_order.pop_back();
@@ -102,7 +100,7 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 		{
 			frame_holder[frameNumber] = pageNumber;
 			numSwaps++;
-			//cout << numSwaps;
+			cout << "swapped " << numSwaps << '\n';
 		}
 
 	protected:

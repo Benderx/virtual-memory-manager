@@ -19,17 +19,22 @@ int main(int argc, char* argv[])
 
 	ReplacementPolicy POLICY = ReplacementPolicy::FIFO;
 	unsigned int page_size = 2;
-	unsigned int n_frames = 16;
+	unsigned int n_frames = 1;
 	unsigned int v_addr = 8;
 
 	virtualMemoryManager vm = virtualMemoryManager(POLICY, page_size, n_frames, v_addr);
 	
 	unsigned long long addr;
+	unsigned long long addr2;
 	
 	cout << "addr? \n";
 	cin >> addr;
+	cout << "addr2? \n";
+	cin >> addr2;
+	cout << '\n';
 	
-	cout << vm.memoryAccess(addr) << '\n';
+	cout << "mem = " << vm.memoryAccess(addr) << '\n';
+	cout << "mem = " << vm.memoryAccess(addr2) << '\n';
 	
 
 
