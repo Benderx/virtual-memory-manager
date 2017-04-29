@@ -17,26 +17,35 @@ int main(int argc, char* argv[])
 {
 	cout << "\n--Andrew Duerig and Gabe Stanton's Testbench--\n\n";
 
-	ReplacementPolicy POLICY = ReplacementPolicy::FIFO;
+	ReplacementPolicy POLICY = ReplacementPolicy::LRU;
 	unsigned int page_size = 2;
-	unsigned int n_frames = 1;
+	unsigned int n_frames = 3;
 	unsigned int v_addr = 8;
 
 	virtualMemoryManager vm = virtualMemoryManager(POLICY, page_size, n_frames, v_addr);
 	
 	unsigned long long addr;
 	unsigned long long addr2;
-	
+	/*
 	cout << "addr? \n";
 	cin >> addr;
 	cout << "addr2? \n";
 	cin >> addr2;
 	cout << '\n';
 	
+	
 	cout << "mem = " << vm.memoryAccess(addr) << '\n';
 	cout << "mem = " << vm.memoryAccess(addr2) << '\n';
+	*/
 	
-
+	cout << "0: mem = " << vm.memoryAccess(0) << '\n' << '\n';
+	cout << "2: mem = " << vm.memoryAccess(2) << '\n' << '\n';
+	cout << "0: mem = " << vm.memoryAccess(0) << '\n' << '\n';
+	cout << "6: mem = " << vm.memoryAccess(6) << '\n' << '\n';
+	cout << "6: mem = " << vm.memoryAccess(6) << '\n' << '\n';
+	cout << "8: mem = " << vm.memoryAccess(8) << '\n' << '\n';
+	cout << "3: mem = " << vm.memoryAccess(3) << '\n' << '\n';
+	cout << "1: mem = " << vm.memoryAccess(1) << '\n' << '\n';
 
 
 	cout << "Testing completed, exiting";

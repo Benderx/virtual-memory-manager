@@ -19,7 +19,6 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 				{
 					found = true;
 					page_index = i;
-					cout << "p_ind = " << page_index << '\n';
 				}
 			}
 
@@ -73,7 +72,7 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 							if(frame_holder.size() < numFrames)
 							{
 								frame_holder.push_back(page_num);
-								lru_order.insert(lru_order.begin(), frame_holder.size());
+								lru_order.insert(lru_order.begin(), frame_holder.size() - 1);
 								page_index = frame_holder.size() - 1;
 							}
 							else
@@ -92,7 +91,21 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 						}
 				}
 			}
-			cout << "pi " << page_index << '\n';
+			cout << '\n' << "Frame_holder: " << '\n';
+			
+			for(int i = 0; i < frame_holder.size(); i++)
+			{
+				cout << frame_holder[i] << '\n';
+			}
+			
+			cout << '\n' << "queueueueueue" << '\n';
+			
+			for(int i = 0; i < lru_order.size(); i++)
+			{
+				cout << lru_order[i] << '\n';
+			}
+			
+			
 			return (page_index * N) + (address % N);
 		}
 
@@ -100,7 +113,8 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 		{
 			frame_holder[frameNumber] = pageNumber;
 			numSwaps++;
-			cout << "swapped " << numSwaps << '\n';
+			cout << "swapped out " << frameNumber << " for " << pageNumber << '\n';
+			cout << numSwaps << " swaps\n";
 		}
 
 	protected:
