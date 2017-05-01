@@ -1,12 +1,12 @@
 #include "virtualMemoryManagerInterface.hpp"
 #include <vector>
 #include <queue>
-// #include <math.h>
+#include <math.h>
 
-class virtualMemoryManager : virtualMemoryManagerInterface
+class virtualMemoryManager : public virtualMemoryManagerInterface
 {
 	public:
-		virtualMemoryManager(ReplacementPolicy p, unsigned int pS, unsigned int nF, unsigned int vA) : virtualMemoryManagerInterface(p, pS, nF, vA) {}
+		virtualMemoryManager(ReplacementPolicy p, unsigned int pS, unsigned int nF, unsigned int vA) : virtualMemoryManagerInterface(p, pow(2, pS), nF, pow(2, vA)) {}
 
 		unsigned long long memoryAccess(unsigned long long address)
 		{
@@ -86,24 +86,24 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 						}
 					default:
 						{
-							cout << "what happened?" << endl;
+							//cout << "what happened?" << endl;
 							break;
 						}
 				}
 			}
-			cout << '\n' << "Frame_holder: " << '\n';
+			//cout << '\n' << "Frame_holder: " << '\n';
 			
-			for(int i = 0; i < frame_holder.size(); i++)
-			{
-				cout << frame_holder[i] << '\n';
-			}
+			// for(int i = 0; i < frame_holder.size(); i++)
+			// {
+			// 	cout << frame_holder[i] << '\n';
+			// }
 			
-			cout << '\n' << "queueueueueue" << '\n';
+			// //cout << '\n' << "queueueueueue" << '\n';
 			
-			for(int i = 0; i < lru_order.size(); i++)
-			{
-				cout << lru_order[i] << '\n';
-			}
+			// for(int i = 0; i < lru_order.size(); i++)
+			// {
+			// 	cout << lru_order[i] << '\n';
+			// }
 			
 			
 			return (page_index * N) + (address % N);
@@ -113,8 +113,8 @@ class virtualMemoryManager : virtualMemoryManagerInterface
 		{
 			frame_holder[frameNumber] = pageNumber;
 			numSwaps++;
-			cout << "swapped out " << frameNumber << " for " << pageNumber << '\n';
-			cout << numSwaps << " swaps\n";
+			//cout << "swapped out " << frameNumber << " for " << pageNumber << '\n';
+			//cout << numSwaps << " swaps\n";
 		}
 
 	protected:

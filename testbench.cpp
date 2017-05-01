@@ -2,7 +2,7 @@
 // By Andrew Duerig and Gabe Stanton
 //
 // how to compile using mingw:
-// g++ .\Project1.cpp myscheduler.cpp -o run.exe -std=c++11
+// g++ testbench.cpp -o run.exe -std=c++11
 //
 //////////////////////////////////////////////////////////////////////////////////////////////
 //
@@ -48,7 +48,7 @@ int main(int argc, char* argv[])
 	cout << "1: mem = " << vm.memoryAccess(1) << '\n' << '\n';
 
 
-	cout << "Testing completed, exiting";
+	cout << "Testing completed, exiting\n";
 	
 	return 0;
 }
