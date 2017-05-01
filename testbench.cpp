@@ -1,14 +1,14 @@
+// Andrew Duerig and Gabe Stanton
 // testbench.cpp
-// By Andrew Duerig and Gabe Stanton
 //
-// how to compile using mingw:
-// g++ testbench.cpp -o run.exe -std=c++11
+// how to compile using linux/mingw:
+// g++ testbench.cpp -o run -std=c++11
 //
 //////////////////////////////////////////////////////////////////////////////////////////////
 //
 //ASSUMPTIONS
 // assert(virtualAddressSpaceSize > N);
-// assert(pow(2, virtualAddressSpaceSize) > numFrames * pow(2,N));
+// assert(pow(2, virtualAddressSpaceSize) > numFrames * pow(2, N));
 
 #include "virtualMemoryManager.cpp"
 #include <random>
@@ -17,38 +17,34 @@ int main(int argc, char* argv[])
 {
 	cout << "\n--Andrew Duerig and Gabe Stanton's Testbench--\n\n";
 
-	ReplacementPolicy POLICY = ReplacementPolicy::LRU;
-	unsigned int page_size = 2;
-	unsigned int n_frames = 3;
-	unsigned int v_addr = 8;
+	unsigned int virtualAddressSize = -1, numFrames = -1, N = -1, policy = -1;
+	unsigned long long v_addr;
 
-	virtualMemoryManager vm = virtualMemoryManager(POLICY, page_size, n_frames, v_addr);
+	cout << "Policy Number (LRU = 1, FIFO=0):  ";
+	cin >> policy;
+	cout << policy << endl;
+	cout << "Enter N: ";
+	cin >> N;
+	cout << N << endl << "Number of Frames: ";
+	cin >> numFrames;
+	cout << numFrames << endl << "Virtual Address Size: ";
+	cin >> virtualAddressSize;
+	cout << virtualAddressSize << endl << endl;
+
+	virtualMemoryManager manager = virtualMemoryManager(policy ? LRU : FIFO, N, numFrames, virtualAddressSize);
 	
-	unsigned long long addr;
-	unsigned long long addr2;
-	/*
-	cout << "addr? \n";
-	cin >> addr;
-	cout << "addr2? \n";
-	cin >> addr2;
-	cout << '\n';
-	
-	
-	cout << "mem = " << vm.memoryAccess(addr) << '\n';
-	cout << "mem = " << vm.memoryAccess(addr2) << '\n';
-	*/
-	
-	cout << "0: mem = " << vm.memoryAccess(0) << '\n' << '\n';
-	cout << "2: mem = " << vm.memoryAccess(2) << '\n' << '\n';
-	cout << "0: mem = " << vm.memoryAccess(0) << '\n' << '\n';
-	cout << "6: mem = " << vm.memoryAccess(6) << '\n' << '\n';
-	cout << "6: mem = " << vm.memoryAccess(6) << '\n' << '\n';
-	cout << "8: mem = " << vm.memoryAccess(8) << '\n' << '\n';
-	cout << "3: mem = " << vm.memoryAccess(3) << '\n' << '\n';
-	cout << "1: mem = " << vm.memoryAccess(1) << '\n' << '\n';
+	cout << "Give an address: ";
+	while (cin >> v_addr) 
+	{
+		cout << std::endl;
+		cout << "Address: " << v_addr << std::endl;
+		cout << "Physical memory: " << manager.memoryAccess(v_addr) << std::endl;
+		cout << "Total Swaps: " << manager.numberPageSwaps() << endl << std::endl;
+		cout << "Give an address: ";
+	}
 
 
-	cout << "Testing completed, exiting\n";
+	cout << "Testing completed, exiting" << std::endl;
 	
 	return 0;
 }

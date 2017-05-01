@@ -1,3 +1,6 @@
+// Andrew Duerig and Gabe Stanton
+// virtualMemoryManager.hpp
+
 #pragma once
 #include <iostream>
 #include <cassert>
